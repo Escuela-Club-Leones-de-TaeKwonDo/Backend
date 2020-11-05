@@ -20,11 +20,7 @@ public class SpringBootSecurityConfiguration extends WebSecurityConfigurerAdapte
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// Reglas para restringir acceso segun roles de usuario
-		http.httpBasic().disable().csrf().disable().sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-			.antMatchers("/api/autenticacion/login", "/api/autenticacion/registro", "/usuario/**").permitAll()
-			.antMatchers("/persona/**").hasAuthority("ADMINISTRADOR").anyRequest().authenticated().and().csrf()
-			.disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint());
+		http.httpBasic().disable().csrf().disable();
 		
 	}
 	
