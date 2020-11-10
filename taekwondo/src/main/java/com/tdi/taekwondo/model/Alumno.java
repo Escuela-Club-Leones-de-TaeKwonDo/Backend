@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
 import javax.validation.constraints.Email;
 
 @Entity
@@ -49,6 +50,44 @@ public class Alumno {
 	@Size(min=2, message="Los apellidos de la persona deben tener al menos 2 letras")
 	private String apellidos;
 	
+    public enum ActividadMarcial {
+        TAEKWONDO,
+        KICK_BOXING,
+        ACONDICIONAMIENTO_FISICO;
+    }
+    
+    public Alumno(Integer id,
+			@Size(min = 2, message = "El nombre de la persona debe tener al menos 2 letras") String nombre,
+			@Size(min = 2, message = "Los apellidos de la persona deben tener al menos 2 letras") String apellidos,
+			ActividadMarcial actividad_marcial, @Past Date fecha_nacimiento, @Size(min = 2) String fotografia,
+			@Size(min = 2) String grado, @Size(min = 2) String seguro_medico, @Size(min = 2) String certificado_medico,
+			@Size(min = 2) String carta_responsiva, String password, @Email String email, Set<Examen> examenes) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.actividad_marcial = actividad_marcial;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.fotografia = fotografia;
+		this.grado = grado;
+		this.seguro_medico = seguro_medico;
+		this.certificado_medico = certificado_medico;
+		this.carta_responsiva = carta_responsiva;
+		this.password = password;
+		this.email = email;
+		this.examenes = examenes;
+	}
+
+	private ActividadMarcial actividad_marcial;
+	
+	public ActividadMarcial getActividad_marcial() {
+		return actividad_marcial;
+	}
+
+	public void setActividad_marcial(ActividadMarcial actividad_marcial) {
+		this.actividad_marcial = actividad_marcial;
+	}
+
 	@Past
 	private Date fecha_nacimiento;
 	
@@ -186,9 +225,10 @@ public class Alumno {
 
 	@Override
 	public String toString() {
-		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fecha_nacimiento="
-				+ fecha_nacimiento + ", fotografia=" + fotografia + ", grado=" + grado + ", seguro_medico="
-				+ seguro_medico + ", certificado_medico=" + certificado_medico + ", carta_responsiva="
-				+ carta_responsiva + ", email=" + email + "]";
+		return "Alumno [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", actividad_marcial="
+				+ actividad_marcial + ", fecha_nacimiento=" + fecha_nacimiento + ", fotografia=" + fotografia
+				+ ", grado=" + grado + ", seguro_medico=" + seguro_medico + ", certificado_medico=" + certificado_medico
+				+ ", carta_responsiva=" + carta_responsiva + ", password=" + password + ", email=" + email
+				+ ", examenes=" + examenes + "]";
 	}
 }
