@@ -24,6 +24,7 @@ public class Evento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_evento")
 	private int id;
 	
 	@OneToOne(optional=true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -35,23 +36,28 @@ public class Evento {
 	
 
 	@Size(min=2, message="El nombre del evento debe tener al menos 2 letras")
+	@Column(name="nombre")
 	private String nombre;
 	
-	@Size(min=2, message="La descripción debe tener al menos 1 letra1")
-	private String descripcion;
+	/*@Size(min=2, message="La descripción debe tener al menos 1 letra1")
+	@Column(name="descripcion")
+	private String descripcion;*/
 	
 	@FutureOrPresent
+	@Column(name="fecha_inicio")
 	private Date fecha_inicio;
 	
 	@FutureOrPresent
+	@Column(name="fecha_fin")
 	private Date fecha_fin;
 	
-	@Digits(fraction = 0, integer = 0)
-	@DecimalMin("0")
+
 	@DecimalMax("999999")
+	@Column(name="costo")
 	private int costo;
 	
 	@Size(min=2, message="El enlace a facebook debe tener al menos 2 letras")
+	@Column(name="enlace_facebook")
 	private String enlace_facebook;
 
 	public Evento(int id, TipoEvento tipo_usuario, String id_tipo_evento,
@@ -61,15 +67,27 @@ public class Evento {
 			@Digits(fraction = 0, integer = 0) @DecimalMin("0") @DecimalMax("999999") int costo,
 			@Size(min = 2, message = "El enlace a facebook debe tener al menos 2 letras") String enlace_facebook) {
 		super();
-		this.id = id;
-		this.tipo_usuario = tipo_usuario;
-		this.id_tipo_evento = id_tipo_evento;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.fecha_inicio = fecha_inicio;
-		this.fecha_fin = fecha_fin;
-		this.costo = costo;
-		this.enlace_facebook = enlace_facebook;
+		this.id = id;								
+		this.tipo_usuario = tipo_usuario;			
+		this.id_tipo_evento = id_tipo_evento;		
+		this.nombre = nombre;						
+		//this.descripcion = descripcion;				
+		this.fecha_inicio = fecha_inicio;			
+		this.fecha_fin = fecha_fin;					
+		this.costo = costo;							
+		this.enlace_facebook = enlace_facebook;	
+	}
+	
+	public Evento(){
+		this.id = 0;								
+		this.tipo_usuario = null;			
+		this.id_tipo_evento = null;		
+		this.nombre = null;						
+		//this.descripcion = null;				
+		this.fecha_inicio = null;			
+		this.fecha_fin = null;					
+		this.costo = 0;							
+		this.enlace_facebook = null;
 	}
 
 	public int getId() {
@@ -104,13 +122,13 @@ public class Evento {
 		this.nombre = nombre;
 	}
 
-	public String getDescripcion() {
+	/*public String getDescripcion() {
 		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
+	}*/
 
 	public Date getFecha_inicio() {
 		return fecha_inicio;
@@ -147,7 +165,7 @@ public class Evento {
 	@Override
 	public String toString() {
 		return "Evento [id=" + id + ", tipo_usuario=" + tipo_usuario + ", id_tipo_evento=" + id_tipo_evento
-				+ ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha_inicio=" + fecha_inicio
+				+ ", nombre=" + nombre + /*", descripcion=" + descripcion +*/ ", fecha_inicio=" + fecha_inicio
 				+ ", fecha_fin=" + fecha_fin + ", costo=" + costo + ", enlace_facebook=" + enlace_facebook + "]";
 	}
 	

@@ -13,6 +13,7 @@ public class TipoEvento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_tipo_evento")
 	int id;
 	
 	@Column(name="nombre_tipo_evento")
