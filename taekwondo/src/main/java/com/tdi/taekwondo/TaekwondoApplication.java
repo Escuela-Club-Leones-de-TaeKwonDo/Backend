@@ -15,9 +15,11 @@ public class TaekwondoApplication {
 	
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
+		System.out.print("third statement");  
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
+				System.out.print("third statement");  
 				registry.addMapping("/**")
 				.allowedOrigins("http://localhost:4200")
 				.allowedMethods("POST", "PUT", "GET", "PATCH", "DELETE");
