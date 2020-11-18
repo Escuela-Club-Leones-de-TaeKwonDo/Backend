@@ -23,7 +23,7 @@ public class AlmunoCtrl {
 	@Autowired
 	private AlumnoService alumnoService;
 	
-	@GetMapping("/alumnos")
+	@GetMapping("/alumno")
 	public List<Alumno> getAlumnos(){
 		return alumnoService.getAlumnos();
 	}
@@ -37,7 +37,7 @@ public class AlmunoCtrl {
 	public ResponseEntity<Object> createAlumno(@Valid @RequestBody Alumno alumno){
 		ResponseEntity<Object> savedPersona = alumnoService.createAlumno(alumno);
 		
-		return savedPersona;
+		return null;
 	}
 	
 	@PutMapping("/persona/{id}")

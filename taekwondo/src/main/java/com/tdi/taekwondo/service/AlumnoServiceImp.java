@@ -14,36 +14,30 @@ import com.tdi.taekwondo.repository.AlumnoRepository;
 public class AlumnoServiceImp implements AlumnoService {
 	
 	@Autowired
-	private AlumnoRepository almnRep;
+	private AlumnoRepository repoAlumno;
 	
 	@Override
 	public List<Alumno> getAlumnos() {
-		// TODO Auto-generated method stub
-		return almnRep.getAlumnos();
+		return repoAlumno.getAlumnos();
 	}
 
 	@Override
 	public ResponseEntity<Object> getAlumno(int id) {
-		// TODO Auto-generated method stub
-		return new ResponseEntity<>(almnRep.findById(id), HttpStatus.OK);
+		return new ResponseEntity<>(repoAlumno.findById(id), HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<Object> createAlumno(Alumno alumno) {
-		return new ResponseEntity<>(almnRep.save(alumno), HttpStatus.OK);
+		return new ResponseEntity<>(repoAlumno.save(alumno), HttpStatus.OK);
 	}
 
 	@Override
 	public void updateAlumno(int id, Alumno alumno) {
-		// TODO Auto-generated method stub
-		almnRep.save(alumno);
+		repoAlumno.save(alumno);
 	}
 
 	@Override
-	public void deleteAlumno(int id) {
-		// TODO Auto-generated method stub		
-		almnRep.deleteById(id);
-		
+	public void deleteAlumno(int id) {	
+		repoAlumno.deleteById(id);
 	}
-
 }

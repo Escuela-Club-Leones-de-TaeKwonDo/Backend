@@ -20,6 +20,10 @@ import javax.validation.constraints.Email;
 @Entity
 public class Alumno {
 	
+	public Alumno() {
+		super();
+	}
+	
 	public Alumno(Integer id,
 			@Size(min = 2, message = "El nombre de la persona debe tener al menos 2 letras") String nombre,
 			@Size(min = 2, message = "Los apellidos de la persona deben tener al menos 2 letras") String apellidos,

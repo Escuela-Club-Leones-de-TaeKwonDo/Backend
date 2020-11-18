@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-import com.tdi.taekwondo.model.Alumno;
+import com.tdi.taekwondo.model.*;
 
 public interface AlumnoService {
 	
