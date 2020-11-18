@@ -19,6 +19,7 @@ public class SpringBootSecurityConfiguration extends WebSecurityConfigurerAdapte
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		System.out.print("third statement");  
 		// Reglas para restringir acceso segun roles de usuario
 		http.httpBasic().disable().csrf().disable();
 		

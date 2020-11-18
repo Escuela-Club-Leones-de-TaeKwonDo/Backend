@@ -32,7 +32,7 @@ public class FileCtrl {
 	  @Autowired
 	  private FileStorageService storageService;
 
-	  @RequestMapping(value = {"/upload"}, method = RequestMethod.POST, consumes = { "multipart/form-data"})
+	  @RequestMapping(value = {"/upload"}, method = RequestMethod.POST, consumes = { "multipart/form-data" })
 	  public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
 	    String message = "";
 	    try {
