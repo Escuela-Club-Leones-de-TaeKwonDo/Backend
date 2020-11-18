@@ -24,24 +24,25 @@ public class Evento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_evento")
+	@Column(name="id")
 	private int id;
 	
-	@OneToOne(optional=true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="id_tipo_evento", insertable=false, updatable=false)
-	private TipoEvento tipo_usuario;
-	
+	/*@OneToOne(optional=true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="id", insertable=false, updatable=false)*/
+	@Column(name="id_tipo_evento")
+	private int id_tipo_evento;
+	/*
 	@Column(name="id_tipo_evento")
 	private String id_tipo_evento;
-	
+	*/
 
 	@Size(min=2, message="El nombre del evento debe tener al menos 2 letras")
 	@Column(name="nombre")
 	private String nombre;
 	
-	/*@Size(min=2, message="La descripción debe tener al menos 1 letra1")
+	@Size(min=2, message="La descripción debe tener al menos 1 letra1")
 	@Column(name="descripcion")
-	private String descripcion;*/
+	private String descripcion;
 	
 	@FutureOrPresent
 	@Column(name="fecha_inicio")
@@ -60,7 +61,7 @@ public class Evento {
 	@Column(name="enlace_facebook")
 	private String enlace_facebook;
 
-	public Evento(int id, TipoEvento tipo_usuario, String id_tipo_evento,
+	public Evento(int id, int id_tipo_evento,//tipo_usuario, String id_tipo_evento,
 			@Size(min = 2, message = "El nombre del evento debe tener al menos 2 letras") String nombre,
 			@Size(min = 2, message = "La descripción debe tener al menos 1 letra1") String descripcion,
 			@FutureOrPresent Date fecha_inicio, @FutureOrPresent Date fecha_fin,
@@ -68,10 +69,10 @@ public class Evento {
 			@Size(min = 2, message = "El enlace a facebook debe tener al menos 2 letras") String enlace_facebook) {
 		super();
 		this.id = id;								
-		this.tipo_usuario = tipo_usuario;			
+		//this.tipo_usuario = tipo_usuario;			
 		this.id_tipo_evento = id_tipo_evento;		
 		this.nombre = nombre;						
-		//this.descripcion = descripcion;				
+		this.descripcion = descripcion;				
 		this.fecha_inicio = fecha_inicio;			
 		this.fecha_fin = fecha_fin;					
 		this.costo = costo;							
@@ -79,15 +80,15 @@ public class Evento {
 	}
 	
 	public Evento(){
-		this.id = 0;								
-		this.tipo_usuario = null;			
+/*		this.id = 0;								
+		//this.tipo_usuario = null;			
 		this.id_tipo_evento = null;		
 		this.nombre = null;						
-		//this.descripcion = null;				
+		this.descripcion = null;				
 		this.fecha_inicio = null;			
 		this.fecha_fin = null;					
 		this.costo = 0;							
-		this.enlace_facebook = null;
+		this.enlace_facebook = null;*/
 	}
 
 	public int getId() {
@@ -98,19 +99,11 @@ public class Evento {
 		this.id = id;
 	}
 
-	public TipoEvento getTipo_usuario() {
-		return tipo_usuario;
-	}
-
-	public void setTipo_usuario(TipoEvento tipo_usuario) {
-		this.tipo_usuario = tipo_usuario;
-	}
-
-	public String getId_tipo_evento() {
+	public int getId_tipo_evento() {
 		return id_tipo_evento;
 	}
 
-	public void setId_tipo_evento(String id_tipo_evento) {
+	public void setId_tipo_evento(int id_tipo_evento) {
 		this.id_tipo_evento = id_tipo_evento;
 	}
 
@@ -122,13 +115,13 @@ public class Evento {
 		this.nombre = nombre;
 	}
 
-	/*public String getDescripcion() {
+	public String getDescripcion() {
 		return descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}*/
+	}
 
 	public Date getFecha_inicio() {
 		return fecha_inicio;
@@ -164,11 +157,9 @@ public class Evento {
 
 	@Override
 	public String toString() {
-		return "Evento [id=" + id + ", tipo_usuario=" + tipo_usuario + ", id_tipo_evento=" + id_tipo_evento
-				+ ", nombre=" + nombre + /*", descripcion=" + descripcion +*/ ", fecha_inicio=" + fecha_inicio
-				+ ", fecha_fin=" + fecha_fin + ", costo=" + costo + ", enlace_facebook=" + enlace_facebook + "]";
-	}
-	
-	
+		return "Evento [id=" + id + ", id_tipo_evento=" + id_tipo_evento + ", nombre=" + nombre + ", descripcion="
+				+ descripcion + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", costo=" + costo
+				+ ", enlace_facebook=" + enlace_facebook + "]";
+	}	
 	
 }

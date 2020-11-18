@@ -18,13 +18,11 @@ public class EventoServiceImp implements EventoService {
 	
 	@Override
 	public List<Evento> getEventos() {
-		// TODO Auto-generated method stub
 		return eventoRep.getEventos();
 	}
 
 	@Override
 	public ResponseEntity<Object> getEvento(int id) {
-		// TODO Auto-generated method stub
 		return new ResponseEntity<>(eventoRep.findById(id), HttpStatus.OK);
 	}
 
@@ -35,15 +33,11 @@ public class EventoServiceImp implements EventoService {
 
 	@Override
 	public void updateEvento(int id, Evento evento) {
-		// TODO Auto-generated method stub
 		eventoRep.save(evento);
 	}
 
 	@Override
 	public void deleteEvento(int id) {
-		// TODO Auto-generated method stub		
 		eventoRep.deleteById(id);
-		
 	}
-
 }

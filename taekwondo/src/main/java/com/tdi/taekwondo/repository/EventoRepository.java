@@ -13,6 +13,7 @@ import com.tdi.taekwondo.model.Evento;
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Integer> {
 	Evento findById(int id);
+	
 	@Query(value="SELECT * FROM evento", nativeQuery=true)
 	List<Evento> getEventos();
 }

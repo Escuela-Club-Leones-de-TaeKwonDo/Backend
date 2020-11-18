@@ -23,7 +23,7 @@ public class EventoCtrl {
 	@Autowired
 	private EventoService eventoService;
 	
-	@GetMapping("/eventos")
+	@GetMapping("/evento")
 	public List<Evento> getEventos(){
 		return eventoService.getEventos();
 	}
@@ -36,7 +36,7 @@ public class EventoCtrl {
 	@PostMapping("/evento")
 	public ResponseEntity<Object> createEvento(@Valid @RequestBody Evento evento){
 		ResponseEntity<Object> savedEvento = eventoService.createEvento(evento);
-		return savedEvento;
+		return null;
 	}
 	
 	@PutMapping("/evento/{id}")
