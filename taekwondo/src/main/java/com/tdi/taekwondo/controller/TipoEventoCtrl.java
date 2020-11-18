@@ -38,7 +38,7 @@ public class TipoEventoCtrl {
 	public ResponseEntity<Object> createTipoEvento(@Valid @RequestBody TipoEvento te){
 		ResponseEntity<Object> savedTipoEvento = tipoEventoService.createTipoEvento(te);
 		
-		return savedTipoEvento;
+		return null;
 	}
 	
 	@PutMapping("/tipo_evento/{id}")

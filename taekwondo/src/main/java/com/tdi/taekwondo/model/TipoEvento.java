@@ -13,6 +13,7 @@ public class TipoEvento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	int id;
 	
 	@Column(name="nombre_tipo_evento")
@@ -44,7 +45,4 @@ public class TipoEvento {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
-
 }
