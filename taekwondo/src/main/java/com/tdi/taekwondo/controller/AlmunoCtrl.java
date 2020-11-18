@@ -40,7 +40,7 @@ public class AlmunoCtrl {
 		return null;
 	}
 	
-	@PutMapping("/persona/{id}")
+	@PutMapping("/alumno/{id}")
 	public void updateAlumno(@Valid @RequestBody Alumno alumno, @PathVariable int id) {
 		alumnoService.updateAlumno(id, alumno);
 	}
