@@ -2,15 +2,11 @@ package com.tdi.taekwondo.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.FutureOrPresent;
@@ -68,8 +64,7 @@ public class Evento {
 			@Digits(fraction = 0, integer = 0) @DecimalMin("0") @DecimalMax("999999") int costo,
 			@Size(min = 2, message = "El enlace a facebook debe tener al menos 2 letras") String enlace_facebook) {
 		super();
-		this.id = id;								
-		//this.tipo_usuario = tipo_usuario;			
+		this.id = id;	
 		this.id_tipo_evento = id_tipo_evento;		
 		this.nombre = nombre;						
 		this.descripcion = descripcion;				
@@ -80,15 +75,6 @@ public class Evento {
 	}
 	
 	public Evento(){
-/*		this.id = 0;								
-		//this.tipo_usuario = null;			
-		this.id_tipo_evento = null;		
-		this.nombre = null;						
-		this.descripcion = null;				
-		this.fecha_inicio = null;			
-		this.fecha_fin = null;					
-		this.costo = 0;							
-		this.enlace_facebook = null;*/
 	}
 
 	public int getId() {

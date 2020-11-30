@@ -16,4 +16,7 @@ public interface EventoRepository extends JpaRepository<Evento, Integer> {
 	
 	@Query(value="SELECT * FROM evento", nativeQuery=true)
 	List<Evento> getEventos();
+	
+	@Query(value="SELECT * FROM evento WHERE id_tipo_evento = :id_tipo_evento", nativeQuery = true)
+	List<Evento> getEventoTipoEvento(int id_tipo_evento);
 }

@@ -14,30 +14,37 @@ import com.tdi.taekwondo.repository.EventoRepository;
 public class EventoServiceImp implements EventoService {
 	
 	@Autowired
-	private EventoRepository eventoRep;
+	private EventoRepository erep;
 	
 	@Override
 	public List<Evento> getEventos() {
-		return eventoRep.getEventos();
+		return erep.getEventos();
 	}
 
 	@Override
-	public ResponseEntity<Object> getEvento(int id) {
-		return new ResponseEntity<>(eventoRep.findById(id), HttpStatus.OK);
+	public Evento getEvento(int id){
+		return erep.findById(id);
 	}
 
 	@Override
-	public ResponseEntity<Object> createEvento(Evento evento) {
-		return new ResponseEntity<>(eventoRep.save(evento), HttpStatus.OK);
+	public void createEvento(Evento evento) {
+		erep.save(evento);
 	}
 
 	@Override
-	public void updateEvento(int id, Evento evento) {
-		eventoRep.save(evento);
+	public void updateEvento(Evento evento) {
+		erep.save(evento);
 	}
 
 	@Override
 	public void deleteEvento(int id) {
-		eventoRep.deleteById(id);
+		erep.deleteById(id);
 	}
+
+	@Override
+	public List<Evento> getEventoTipoEvento(int id_tipo_evento) {
+		return erep.getEventoTipoEvento(id_tipo_evento);
+	}
+	
+	
 }
