@@ -55,6 +55,10 @@ public class Examen {
 		this.horario = horario;
 		this.enlace_facebook = enlace_facebook;
 	}
+	
+	public Examen(){
+		
+	}
 
 	public Integer getId() {
 		return id;
