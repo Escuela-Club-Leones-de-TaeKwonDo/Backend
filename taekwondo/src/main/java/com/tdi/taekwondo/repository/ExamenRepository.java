@@ -7,14 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.tdi.taekwondo.model.Alumno;
+import com.tdi.taekwondo.model.Examen;
 
 @EntityScan(basePackages = {"com.tdi.taekwondo.entity"})
 @Repository
-public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
-	Alumno findById(int id);
-	Alumno findByEmail(String email);
+public interface ExamenRepository extends JpaRepository<Examen, Integer> {
+	Examen findById(int id);
 	
-	@Query(value="SELECT * FROM alumno", nativeQuery=true)
-	List<Alumno> getAlumnos();
+	@Query(value="SELECT * FROM examen", nativeQuery=true)
+	List<Examen> getExamenes();
 }

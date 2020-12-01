@@ -20,15 +20,8 @@ public class Examen {
 	
 	@Size(min=2, message="El nombre del examen debe tener al menos 2 letras")
 	private String nombre;
-	
-    public enum TipoExamen {
-        PROMOCION_GRADO,
-        CAMBIO_CINTA,
-        TEORICO,
-        REVISION;
-    }
     
-    private TipoExamen tipo_examen;
+    private String tipo_examen;
     
 	@FutureOrPresent
 	private Date fecha;
@@ -41,10 +34,14 @@ public class Examen {
 	
 	@ManyToMany(mappedBy = "examenes")
     Set<Alumno> alumnos;
+	
+	public Examen() {
+		
+	}
 
 	public Examen(Integer id,
 			@Size(min = 2, message = "El nombre del examen debe tener al menos 2 letras") String nombre,
-			TipoExamen tipo_examen, @FutureOrPresent Date fecha,
+			String tipo_examen, @FutureOrPresent Date fecha,
 			@Size(min = 2, max = 5, message = "La hora debe tener exactamente 5 caracteres") String horario,
 			@Size(min = 2, message = "El enlace a facebook debe tener al menos 2 letras") String enlace_facebook) {
 		super();
@@ -72,11 +69,11 @@ public class Examen {
 		this.nombre = nombre;
 	}
 
-	public TipoExamen getTipo_examen() {
+	public String getTipo_examen() {
 		return tipo_examen;
 	}
 
-	public void setTipo_examen(TipoExamen tipo_examen) {
+	public void setTipo_examen(String tipo_examen) {
 		this.tipo_examen = tipo_examen;
 	}
 
