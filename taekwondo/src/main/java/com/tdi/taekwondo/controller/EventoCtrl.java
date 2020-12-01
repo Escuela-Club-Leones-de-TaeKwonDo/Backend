@@ -1,7 +1,6 @@
 package com.tdi.taekwondo.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -32,8 +31,7 @@ public class EventoCtrl {
 	
 	@GetMapping("/evento/{id}")
 	public ResponseEntity<Object> getEvento(@PathVariable int id){
-		Evento evento = esrv.getEvento(id);
-		return new ResponseEntity<>(evento,HttpStatus.OK);
+		return new ResponseEntity<>(esrv.getEvento(id),HttpStatus.OK);
 	}
 	
 	@GetMapping("evento/tipo_evento/{id_tipo_evento}")
@@ -65,6 +63,12 @@ public class EventoCtrl {
 			response.put("status","failure");
 			response.put("message","Los ids del evento no coinciden");
 			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		if(evento.getId_tipo_evento() != id_tipo_evento) {
+			response.put("status","failure");
+			response.put("message","Los ids del tipo evento no coinciden");
+			return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
 		}
 		
 		esrv.updateEvento(evento);
