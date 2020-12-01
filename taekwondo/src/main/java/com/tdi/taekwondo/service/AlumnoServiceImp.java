@@ -18,7 +18,7 @@ import com.tdi.taekwondo.model.Alumno;
 import com.tdi.taekwondo.repository.AlumnoRepository;
 
 @Service
-public class AlumnoServiceImp implements AlumnoService {
+public class AlumnoServiceImp implements UserDetailsService, AlumnoService {
 	
 	@Autowired
 	private AlumnoRepository repoAlumno;
