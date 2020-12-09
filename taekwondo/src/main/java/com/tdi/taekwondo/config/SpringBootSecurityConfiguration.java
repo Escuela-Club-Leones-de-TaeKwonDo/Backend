@@ -2,49 +2,25 @@ package com.tdi.taekwondo.config;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
-
-import com.tdi.taekwondo.service.AlumnoServiceImp;
 
 @Configuration
 public class SpringBootSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	
-    @Autowired
-    JwtTokenProvider jwtTokenProvider;
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder autenticacion) throws Exception{
-		System.out.println("//////////////");
-		UserDetailsService userDetailsService = detallesUsuario();
-		autenticacion.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-	}
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// Reglas para restringir acceso segun roles de usuario		
-		System.out.println("//////////////");
-		http.httpBasic().disable().csrf().disable().sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests() 
-		.antMatchers("/auth/alumno/login**", "/alumno/**").permitAll()
-		.antMatchers("/alumno/**").hasAuthority("ADMINISTRADOR").anyRequest().authenticated().and().csrf()
-		.disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and()
-		.apply(new JwtConfigurer(jwtTokenProvider));
+		// Reglas para restringir acceso segun roles de usuario
+		http.httpBasic().disable().csrf().disable();
 		
-		http.cors();
-
 	}
 	
 	@Override
@@ -66,11 +42,5 @@ public class SpringBootSecurityConfiguration extends WebSecurityConfigurerAdapte
 	@Bean
 	public PasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
-	
-	@Bean
-	public UserDetailsService detallesUsuario() {
-		System.out.println("//////////////");
-		return (UserDetailsService) new AlumnoServiceImp();
 	}
 }
