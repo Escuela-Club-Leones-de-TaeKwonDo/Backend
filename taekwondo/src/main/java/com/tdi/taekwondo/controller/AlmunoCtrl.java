@@ -15,13 +15,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tdi.taekwondo.service.AlumnoService;
+//import com.tdi.taekwondo.service.EmailService;
 import com.tdi.taekwondo.model.Alumno;
+import com.tdi.taekwondo.service.PasswordGeneratorService;
 
 @RestController
 public class AlmunoCtrl {
 	
 	@Autowired
 	private AlumnoService alumnoService;
+	
+//	@Autowired
+//	private EmailService emailService;
 	
 	@GetMapping("/alumno")
 	public List<Alumno> getAlumnos(){
@@ -35,7 +40,15 @@ public class AlmunoCtrl {
 	
 	@PostMapping("/alumno")
 	public ResponseEntity<Object> createAlumno(@Valid @RequestBody Alumno alumno){
+		String sufflePassword = PasswordGeneratorService.generateStrongPassword();
+		alumno.setPassword(sufflePassword);
+		
 		ResponseEntity<Object> savedPersona = alumnoService.createAlumno(alumno);
+//		String emailToSend = alumno.getEmail();
+//		System.out.println(emailToSend);
+//		System.out.println(sufflePassword);
+//		System.out.println(emailService);
+//		emailService.sendMail("kate@example.com", "Test Subject", "Test mail");
 		
 		return null;
 	}

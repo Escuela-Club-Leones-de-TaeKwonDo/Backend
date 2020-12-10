@@ -10,11 +10,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 import com.tdi.taekwondo.service.AlumnoServiceImp;
+import com.tdi.taekwondo.service.AdministradorServiceImp;
 
 @Configuration
 public class SpringBootSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -25,19 +28,18 @@ public class SpringBootSecurityConfiguration extends WebSecurityConfigurerAdapte
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder autenticacion) throws Exception{
-		System.out.println("//////////////");
+		UserDetailsService adminDetailsService = detallesAdmin();
+		autenticacion.userDetailsService(adminDetailsService).passwordEncoder(bCryptPasswordEncoder());
 		UserDetailsService userDetailsService = detallesUsuario();
 		autenticacion.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// Reglas para restringir acceso segun roles de usuario		
-		System.out.println("//////////////");
 		http.httpBasic().disable().csrf().disable().sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests() 
-		.antMatchers("/auth/alumno/login**", "/alumno/**").permitAll()
-		.antMatchers("/alumno/**").hasAuthority("ADMINISTRADOR").anyRequest().authenticated().and().csrf()
+		.antMatchers("/auth/admin/login/**", "/auth/alumno/login**", "/**").permitAll()
+		.antMatchers("/alumno/**", "/evento/**", "/tipo-evento/**", "/examen/**").hasAuthority("ADMINISTRADOR").anyRequest().authenticated().and().csrf()
 		.disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and()
 		.apply(new JwtConfigurer(jwtTokenProvider));
 		
@@ -68,7 +70,13 @@ public class SpringBootSecurityConfiguration extends WebSecurityConfigurerAdapte
 	
 	@Bean
 	public UserDetailsService detallesUsuario() {
-		System.out.println("//////////////");
 		return (UserDetailsService) new AlumnoServiceImp();
+	}
+	
+	@Bean
+	public UserDetailsService detallesAdmin() {
+		System.out.println("%%%%%%%%%%%%%");
+
+		return (UserDetailsService) new AdministradorServiceImp();
 	}
 }

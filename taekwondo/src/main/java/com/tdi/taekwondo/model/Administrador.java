@@ -18,6 +18,11 @@ public class Administrador {
 	@Email
 	private String email;
 
+
+	public Administrador() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "Administrador [id=" + id + ", password=" + password + ", email=" + email + "]";
@@ -69,5 +74,9 @@ public class Administrador {
 		} else if (!password.equals(other.password))
 			return false;
 		return true;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 }

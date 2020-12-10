@@ -12,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.tdi.taekwondo.service.AdministradorService;
 import com.tdi.taekwondo.service.AlumnoService;
 
 import io.jsonwebtoken.Claims;
@@ -30,6 +32,7 @@ public class JwtTokenProvider {
 
     @Autowired
     private AlumnoService userDetailsService;
+    private AdministradorService adminDetailsService;
 
     @PostConstruct
     protected void init() {
@@ -39,6 +42,8 @@ public class JwtTokenProvider {
     public String createToken(String username) {
         Claims claims = Jwts.claims().setSubject(username);
         Date now = new Date();
+        System.out.println("////(&/%sss&");
+        System.out.println(username);
         Date validity = new Date(now.getTime() + validityInMilliseconds);
         return Jwts.builder()
             .setClaims(claims)
@@ -49,15 +54,26 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
+    	System.out.println("#@@@@@@@@@@@");
+    	System.out.println(token);
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+    
+    public Authentication getAuthenticationAdmin(String token) {
+        System.out.println(token);
+        System.out.println("//////////////////");
+        UserDetails userDetails = this.adminDetailsService.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public String getUsername(String token) {
+    	System.out.println("////(&/%&");
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     public String resolveToken(HttpServletRequest req) {
+    	System.out.println("////(&/%&");
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7, bearerToken.length());
@@ -66,6 +82,7 @@ public class JwtTokenProvider {
     }
 
     public boolean validateToken(String token) {
+    		System.out.println("////(&/%&");
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             if (claims.getBody().getExpiration().before(new Date())) {
                 return false;
