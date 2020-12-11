@@ -53,17 +53,11 @@ public class Alumno {
 	
 	@Size(min=2, message="Los apellidos de la persona deben tener al menos 2 letras")
 	private String apellidos;
-	
-    public enum ActividadMarcial {
-        TAEKWONDO,
-        KICK_BOXING,
-        ACONDICIONAMIENTO_FISICO;
-    }
     
     public Alumno(Integer id,
 			@Size(min = 2, message = "El nombre de la persona debe tener al menos 2 letras") String nombre,
 			@Size(min = 2, message = "Los apellidos de la persona deben tener al menos 2 letras") String apellidos,
-			ActividadMarcial actividad_marcial, @Past Date fecha_nacimiento, @Size(min = 2) String fotografia,
+			String actividad_marcial, @Past Date fecha_nacimiento, @Size(min = 2) String fotografia,
 			@Size(min = 2) String grado, @Size(min = 2) String seguro_medico, @Size(min = 2) String certificado_medico,
 			@Size(min = 2) String carta_responsiva, String password, @Email String email, Set<Examen> examenes) {
 		super();
@@ -82,13 +76,13 @@ public class Alumno {
 		this.examenes = examenes;
 	}
 
-	private ActividadMarcial actividad_marcial;
+	private String actividad_marcial;
 	
-	public ActividadMarcial getActividad_marcial() {
+	public String getActividad_marcial() {
 		return actividad_marcial;
 	}
 
-	public void setActividad_marcial(ActividadMarcial actividad_marcial) {
+	public void setActividad_marcial(String actividad_marcial) {
 		this.actividad_marcial = actividad_marcial;
 	}
 

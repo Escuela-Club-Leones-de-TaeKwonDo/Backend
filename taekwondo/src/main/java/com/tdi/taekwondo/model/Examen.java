@@ -32,6 +32,10 @@ public class Examen {
 	@Size(min=2, message="El enlace a facebook debe tener al menos 2 letras")
 	private String enlace_facebook;
 	
+	private int costo;
+	
+	private String solicitud_examen;
+	
 	@ManyToMany(mappedBy = "examenes")
     Set<Alumno> alumnos;
 	
@@ -41,15 +45,18 @@ public class Examen {
 
 	public Examen(Integer id,
 			@Size(min = 2, message = "El nombre del examen debe tener al menos 2 letras") String nombre,
-			String tipo_examen, @FutureOrPresent Date fecha,
+			String tipo_examen, int costo, @FutureOrPresent Date fecha,
 			@Size(min = 2, max = 5, message = "La hora debe tener exactamente 5 caracteres") String horario,
+			String solicitud_examen,
 			@Size(min = 2, message = "El enlace a facebook debe tener al menos 2 letras") String enlace_facebook) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.tipo_examen = tipo_examen;
+		this.costo = costo;
 		this.fecha = fecha;
 		this.horario = horario;
+		this.solicitud_examen = solicitud_examen;
 		this.enlace_facebook = enlace_facebook;
 	}
 
@@ -77,6 +84,14 @@ public class Examen {
 		this.tipo_examen = tipo_examen;
 	}
 
+	public int getCosto() {
+		return costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -101,12 +116,18 @@ public class Examen {
 		this.enlace_facebook = enlace_facebook;
 	}
 
+	public String getSolicitud_examen() {
+		return solicitud_examen;
+	}
+
+	public void setSolicitud_examen(String solicitud_examen) {
+		this.solicitud_examen = solicitud_examen;
+	}
+
 	@Override
 	public String toString() {
 		return "Examen [id=" + id + ", nombre=" + nombre + ", tipo_examen=" + tipo_examen + ", fecha=" + fecha
-				+ ", horario=" + horario + ", enlace_facebook=" + enlace_facebook + "]";
-	}
-	
-	
-    
+				+ ", horario=" + horario + ", enlace_facebook=" + enlace_facebook + ", costo=" + costo
+				+ ", solicitud_examen=" + solicitud_examen + ", alumnos=" + alumnos + "]";
+	}  
 }
