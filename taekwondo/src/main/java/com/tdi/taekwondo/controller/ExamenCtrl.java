@@ -1,5 +1,6 @@
 package com.tdi.taekwondo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,19 +15,25 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tdi.taekwondo.model.Alumno;
 import com.tdi.taekwondo.model.Examen;
+import com.tdi.taekwondo.model.Ex_al;
+import com.tdi.taekwondo.service.AlumnoService;
+import com.tdi.taekwondo.service.Ex_alService;
 import com.tdi.taekwondo.service.ExamenService;
+import com.tdi.taekwondo.service.PasswordGeneratorService;
+
 
 @RestController
 public class ExamenCtrl {
 	
 	@Autowired
 	private ExamenService esrv;
-	/*
+	
 	@Autowired
 	private Ex_alService ex_alService;
 	@Autowired 
-	private AlumnoService alumnoService;*/
+	private AlumnoService alumnoService;
 	
 	@GetMapping("/examen")
 	public List<Examen> getExamenes(){
@@ -49,6 +56,28 @@ public class ExamenCtrl {
 		esrv.updateExamen(id, examen);
 	}
 	
+	
+	
+	/*
+	@PutMapping("/examenA")
+	public void createEx_al( @Valid @RequestBody Ex_al reg){
+		int id_examenE = reg.getId_examenE();
+		int id_alumnoE = reg.getId_alumnoE();
+		System.out.println("****************");
+		System.out.println(id_examenE);
+		System.out.println(id_alumnoE);
+		System.out.println("****************");
+		ex_alService.insertEx_al(id_examenE,id_alumnoE);
+	}*/
+	@PostMapping("/examenA")
+	public ResponseEntity<Object> createEx_al(@Valid @RequestBody Ex_al reg){
+		
+		ResponseEntity<Object> savedPersona = ex_alService.createEx_al(reg);
+		return savedPersona;
+	}
+	
+	
+	
 	@DeleteMapping("/examen/{id}")
 	public void deleteExamen(@PathVariable int id) {
 		esrv.deleteExamen(id);
@@ -58,7 +87,7 @@ public class ExamenCtrl {
 	public ExamenCtrl(ExamenService examenService) {
 		super();
 		this.examenService = examenService;
-	}
+	}*/
 
 	@GetMapping("/examenA/{id}")
 	public List<Alumno> getAlumnos(@PathVariable int id) {
@@ -71,6 +100,7 @@ public class ExamenCtrl {
 			}
 		}
 		return alumnos;
-	}*/
+	}
+	
 	
 }

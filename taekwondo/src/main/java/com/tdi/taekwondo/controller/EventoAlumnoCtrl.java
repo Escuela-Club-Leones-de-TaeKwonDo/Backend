@@ -13,5 +13,4 @@ import com.tdi.taekwondo.service.EventoAlumnoService;
 @RestController
 public class EventoAlumnoCtrl {
 	
-	
 }
