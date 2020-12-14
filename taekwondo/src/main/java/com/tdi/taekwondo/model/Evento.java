@@ -23,6 +23,8 @@ public class Evento {
 	@Column(name="id")
 	private int id;
 	
+	
+	
 	/*@OneToOne(optional=true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="id", insertable=false, updatable=false)*/
 	@Column(name="id_tipo_evento")

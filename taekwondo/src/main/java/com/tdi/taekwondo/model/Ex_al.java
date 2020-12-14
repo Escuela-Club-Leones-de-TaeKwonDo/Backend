@@ -26,8 +26,6 @@ public class Ex_al {
 	}
 	
 	
-	
-	
 	public int getId_alumnoE() {
 		return id_alumnoE;
 	}

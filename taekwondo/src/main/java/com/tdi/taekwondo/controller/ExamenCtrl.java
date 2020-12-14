@@ -70,8 +70,7 @@ public class ExamenCtrl {
 		ex_alService.insertEx_al(id_examenE,id_alumnoE);
 	}*/
 	@PostMapping("/examenA")
-	public ResponseEntity<Object> createEx_al(@Valid @RequestBody Ex_al reg){
-		
+	public ResponseEntity<Object> createEx_al(@Valid @RequestBody Ex_al reg){	
 		ResponseEntity<Object> savedPersona = ex_alService.createEx_al(reg);
 		return savedPersona;
 	}
